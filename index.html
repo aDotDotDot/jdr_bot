@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Test page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        const send = async () => {
+            const rawResponse = await fetch('http://liketomove.it/sendmsg', {
+                method: 'POST',
+                headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({message: document.getElementById("message").value})
+            });
+            console.log(rawResponse.body)
+            const content = await rawResponse.json();
+
+            console.log(content);
+            };
+        window.send=send;
+    </script>
+</head>
+<body>
+    <textarea name="message" id="message"></textarea>
+    <button onclick='send()'>Envoyer</button>
+</body>
+</html>
